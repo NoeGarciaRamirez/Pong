@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -47,7 +48,7 @@ public class App extends Application {
         stage.setScene (scene);
         stage.show();
         
-        //nuevo circulo, crear un objeto de clase Circle
+        //nuevo círculo, crear un objeto de clase Circle
         Circle circleBall = new Circle();
         //llamado a métodos del objeto del objeto circleBall
         circleBall.setCenterX(10);
@@ -122,6 +123,14 @@ public class App extends Application {
                         stickDirection = 0;
                         stickPosY = (short) (SCENE_HEIGHT - stickHeight);
                     }
+                    
+                    Shape shapeCollision = Shape.intersect(circleBall, rectStick);//Objeto es distinto de clase, cuando se pone el nombre de la clase
+                    boolean colisionVacia = shapeCollision.getBoundsInLocal().isEmpty();
+                    if (colisionVacia == false) {
+                        System.out.println("choque");
+                        ballDirectionX = -1;
+                    }
+                            
                 }
             })
         );
